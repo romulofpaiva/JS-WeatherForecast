@@ -1,0 +1,32 @@
+#title {
+  font-size: 20px;
+}
+
+#page {
+  align-content: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  background-color: #f7c363;
+  width: 500px;
+  height: 500px;
+  padding: 5px;
+  /* line-height: 25px; */
+}
+
+#countryAnalysis, #cityAnalysis {
+  border-radius: 10px;  
+  border-style: outset;
+  padding: 5px;
+  width: 480px;
+  text-align: justify;
+  opacity: 70%;
+  background-color: white;
+  animation: ;
+}
+
+p {
+  text-justify: justify;
+  text-indent: 0px;
+  line-height: 20px;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Previsão do Tempo</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+  <div id="page">
+    <h1 id="title">Previsão do Tempo</h1>
+
+    <div id="countryAnalysis">
+      <p id="countrySynopticAnalysis"></p>
+    </div>
+
+    <label>Estado</label>
+    <select id="state" onchange="fillCity()"></select>
+    </br>
+    
+    <label>Cidade</label>
+    <input type="search" id="city" onkeyup="findCity()" onchange="findCity()" placeholder="Pesquisa por cidade..." title="Digite uma Cidade">
+    <ul id="listCities">
+    </ul>
+
+    <div id="cityAnalysis" hidden>
+      <p id="analysis"></p>
+    </div>
+  </div>
+
+  <script src='./../src/main.js'></script>
+</body>
+</html>
