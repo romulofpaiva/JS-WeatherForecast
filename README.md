@@ -1,6 +1,7 @@
 # JS-WeatherForecast
 
 Linguagem: JavaScript
+
 APIs: JQuery, IBGE, Clima Tempo
 
 Apresenta a previsão sinóptica do clima no Brasil através da consulta à API do Clima Tempo.
