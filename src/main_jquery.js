@@ -62,7 +62,6 @@ async function registerCity(cityId) {
       url: `https://cors-anywhere.herokuapp.com/http://apiadvisor.climatempo.com.br/api-manager/user-token/${tokenClimaTempo}/locales`,
       data: `localeId[]=${cityId}`
     });
-    console.log(response);
   } catch(error) {
     console.log(error);
   }

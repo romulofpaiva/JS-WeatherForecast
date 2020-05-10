@@ -92,7 +92,6 @@ async function currentWeatherByCity() {
       if(response.status !== 200 || response.data.length == 0)
         $("#analysis").text('');
       else {
-        console.log(response.data);
         const {condition, date, humidity, sensation, temperature} = response.data.data;
         const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
         const event = new Date(date);
