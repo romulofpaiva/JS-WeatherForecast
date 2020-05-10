@@ -11,16 +11,20 @@ var cities = [];
 
 
 function countrySynopticAnalysis() {
+  var text = "";
+
   $.getJSON(
     `http://apiadvisor.climatempo.com.br/api/v1/anl/synoptic/locale/BR?token=${tokenClimaTempo}`,
     "",
     function(data, status, xhr){
-      if(status !== 'success'){
-        alert('Não foi possível obter a análise sinótica meteorológica do paí­s.');
-        return;
-      }
+      if(status !== 'success')
+        text = 'Não foi possível obter a análise sinótica meteorológica do paí­s.';
+      else if(data.length == 0)
+        text = "Análise sinótica meteorológica não disponível.";
+      else
+        text = data[0].text;
 
-      $("#countrySynopticAnalysis").append( data[0].text );
+      $("#countrySynopticAnalysis").append( text );
     });
 };
 
@@ -48,22 +52,20 @@ async function findCityId(cityName, UF) {
   return cityId;
 };
 
-function registerCity(cityId) {
+async function registerCity(cityId) {
   if(cityId == null)
     return;
 
-  $.ajax({
-      url: `http://apiadvisor.climatempo.com.br/api-manager/user-token/${tokenClimaTempo}/locales`,
-      method: "PUT",
-      contentType: 'application/x-www-form-urlencoded',
-      data: `localeId[]=${cityId}`,
-      success: function( msg ) {
-        console.log( "Data Saved: " + msg );
-      },
-      error: function( jqXHR, textStatus ) {
-        console.log( "Request failed: " + textStatus );
-      }
+  try {
+    const response = await $.ajax({
+      type: "PUT",
+      url: `https://cors-anywhere.herokuapp.com/http://apiadvisor.climatempo.com.br/api-manager/user-token/${tokenClimaTempo}/locales`,
+      data: `localeId[]=${cityId}`
     });
+    console.log(response);
+  } catch(error) {
+    console.log(error);
+  }
 };
 
 async function currentWeatherByCity() {
@@ -77,7 +79,7 @@ async function currentWeatherByCity() {
     return;
   }
 
-  // await registerCity(cityId);
+  await registerCity(cityId);
 
   $.getJSON(
     `http://apiadvisor.climatempo.com.br/api/v1/weather/locale/${cityId}/current?token=${tokenClimaTempo}`,
@@ -99,7 +101,7 @@ async function currentWeatherByCity() {
       $("#analysis").append( `Umidade: ${humidity}</br>` );
       $("#analysis").append( `Sensação Térmica: ${sensation}</br>` );
       $("#analysis").append( `Temperatura: ${temperature} °C</br>` );
-      // $("div#cityAnalysis").attr('hidden', false);
+      $("div#cityAnalysis").attr('hidden', false);
     }
   );
 }
